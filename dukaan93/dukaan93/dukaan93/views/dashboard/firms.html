@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Firms - Dukaan 93</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Include sidebar -->
+        <div id="sidebar-container"></div>
+
+        <div class="main-content">
+            <!-- Include header -->
+            <div id="header-container"></div>
+
+            <div class="dashboard-content">
+                <div class="page-header">
+                    <h2>Manage Firms</h2>
+                    <button class="btn btn-primary" id="create-firm-btn">Create New Firm</button>
+                </div>
+
+                <div class="firms-container">
+                    <div class="firms-list" id="firms-list">
+                        <!-- Firms will be populated by JavaScript -->
+                        <p class="empty-state">No firms created yet</p>
+                    </div>
+
+                    <div class="firm-form-container" id="firm-form-container" style="display: none;">
+                        <h3 id="firm-form-title">Create New Firm</h3>
+                        <form id="firm-form">
+                            <input type="hidden" id="firm-id">
+                            <div class="form-group">
+                                <label for="firm-name">Firm Name *</label>
+                                <input type="text" id="firm-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="firm-gst">GST Number</label>
+                                <input type="text" id="firm-gst" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="firm-address">Address</label>
+                                <textarea id="firm-address" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="firm-phone">Phone</label>
+                                <input type="text" id="firm-phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="firm-email">Email</label>
+                                <input type="email" id="firm-email" class="form-control">
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Firm</button>
+                                <button type="button" class="btn btn-secondary" id="cancel-firm-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete this firm? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="confirm-delete-btn">Delete</button>
+                <button class="btn btn-secondary" id="cancel-delete-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/firms.js"></script>
+    <script>
+        // Load partials
+        loadPartial('#sidebar-container', '/partials/sidebar.html');
+        loadPartial('#header-container', '/partials/header.html');
+        
+        // Initialize firms page
+        document.addEventListener('DOMContentLoaded', () => {
+            initFirmsPage();
+        });
+    </script>
+</body>
+</html>

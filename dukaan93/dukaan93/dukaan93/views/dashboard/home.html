@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DUKAAN 93</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar (Fixed) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>DUKAAN 93</h1>
+            </div>
+            
+            <div class="firm-selector">
+                <button id="firm-select-btn" class="firm-select-btn">
+                    <span id="current-firm-name">Select Firm</span>
+                    <span class="arrow-down">▼</span>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="/dashboard/home" class="active">
+                            <span class="icon">📊</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/firms">
+                            <span class="icon">🏢</span>
+                            <span>Firms</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <span class="icon">📦</span>
+                            <span>Products</span>
+                            <span class="arrow-down">▼</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-action="create-product">Create Product</a></li>
+                            <li><a href="#" data-action="alter-product">Alter Product</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <span class="icon">👥</span>
+                            <span>Parties</span>
+                            <span class="arrow-down">▼</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-action="create-party">Create Party</a></li>
+                            <li><a href="#" data-action="alter-party">Alter Party</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <span class="icon">📝</span>
+                            <span>Vouchers</span>
+                            <span class="arrow-down">▼</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-action="create-voucher">Create Voucher</a></li>
+                            <li><a href="#" data-action="view-vouchers">View Vouchers</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-action="add-expense">
+                            <span class="icon">💰</span>
+                            <span>Expenses</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <span class="icon">📊</span>
+                            <span>Reports</span>
+                            <span class="arrow-down">▼</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-action="stock-summary">Stock Summary</a></li>
+                            <li><a href="#" data-action="accounts-book">Accounts Book</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <span class="user-name" id="user-name">User Name</span>
+                </div>
+                <button id="logout-btn" class="logout-btn">Logout</button>
+            </div>
+        </aside>
+        
+        <!-- Main Content (Dynamic) -->
+        <main class="main-content">
+            <div id="content-area">
+                <!-- This area will be dynamically updated based on navigation -->
+                <div class="dashboard-welcome" id="dashboard-welcome">
+                    <h2>Welcome to Your Dashboard</h2>
+                    <p>Please select a firm to get started or create a new one.</p>
+                    
+                    <div class="dashboard-actions">
+                        <button id="create-firm-btn" class="btn-primary">Create New Firm</button>
+                    </div>
+                </div>
+                
+                <div class="dashboard-stats" id="dashboard-stats" style="display: none;">
+                    <h2>Dashboard</h2>
+                    <p>Firm: <span id="stats-firm-name"></span></p>
+                    
+                    <div class="stats-cards">
+                        <div class="stats-card">
+                            <h3>Sales</h3>
+                            <p class="stats-number" id="sales-counter">0</p>
+                        </div>
+                        <div class="stats-card">
+                            <h3>Purchases</h3>
+                            <p class="stats-number" id="purchase-counter">0</p>
+                        </div>
+                        <div class="stats-card">
+                            <h3>Products</h3>
+                            <p class="stats-number" id="products-count">0</p>
+                        </div>
+                        <div class="stats-card">
+                            <h3>Parties</h3>
+                            <p class="stats-number" id="parties-count">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <ul id="recent-activity-list">
+                            <!-- This will be populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modals -->
+    <div id="firm-select-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Firm</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <ul id="firm-list">
+                    <!-- Firms will be listed here -->
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button id="create-new-firm-btn" class="btn-secondary">Create New Firm</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="create-firm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Firm</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="create-firm-form">
+                    <div class="form-group">
+                        <label for="firm-name">Firm Name</label>
+                        <input type="text" id="firm-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firm-address">Address</label>
+                        <textarea id="firm-address" name="address" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="firm-gstin">GSTIN (if applicable)</label>
+                        <input type="text" id="firm-gstin" name="gstin">
+                    </div>
+                    <div class="form-group">
+                        <label for="firm-phone">Phone</label>
+                        <input type="tel" id="firm-phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="firm-email">Email</label>
+                        <input type="email" id="firm-email" name="email">
+                    </div>
+                    <div class="form-group">

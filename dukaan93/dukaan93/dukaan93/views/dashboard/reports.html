@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Dukaan 93</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Include sidebar -->
+        <div id="sidebar-container"></div>
+
+        <div class="main-content">
+            <!-- Include header -->
+            <div id="header-container"></div>
+
+            <div class="dashboard-content">
+                <div class="page-header">
+                    <h2>Reports</h2>
+                </div>
+
+                <div class="reports-tabs">
+                    <button class="tab-btn active" data-tab="stock">Stock Summary</button>
+                    <button class="tab-btn" data-tab="sales">Sales Summary</button>
+                    <button class="tab-btn" data-tab="purchase">Purchase Summary</button>
+                    <button class="tab-btn" data-tab="profit">Profit & Loss</button>
+                    <button class="tab-btn" data-tab="accounts">Accounts Book</button>
+                </div>
+
+                <div class="report-filters">
+                    <div class="filter-group">
+                        <label for="filter-date-from">From:</label>
+                        <input type="date" id="filter-date-from" class="form-control-sm">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-date-to">To:</label>
+                        <input type="date" id="filter-date-to" class="form-control-sm">
+                    </div>
+                    <button class="btn btn-secondary btn-sm" id="apply-filters-btn">Apply Filters</button>
+                    <button class="btn btn-secondary btn-sm" id="reset-filters-btn">Reset</button>
+                    <button class="btn btn-primary btn-sm" id="export-report-btn">Export to PDF</button>
+                </div>
+
+                <!-- Stock Summary Tab Content -->
+                <div class="tab-content" id="stock-tab-content">
+                    <h3>Stock Summary</h3>
+                    <div class="report-content" id="stock-summary-content">
+                        <div class="report-table-container">
+                            <table class="report-table" id="stock-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Product Code</th>
+                                        <th>Purchase Price</th>
+                                        <th>Selling Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Stock data will be populated by JavaScript -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4"><strong>Total</strong></td>
+                                        <td id="total-quantity">0</td>
+                                        <td id="total-stock-value">₹0.00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales Summary Tab Content -->
+                <div class="tab-content" id="sales-tab-content" style="display: none;">
+                    <h3>Sales Summary</h3>
+                    <div class="report-content" id="sales-summary-content">
+                        <div class="summary-cards">
+                            <div class="summary-card">
+                                <h4>Total Sales</h4>
+                                <p id="total-sales-amount">₹0.00</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Total Transactions</h4>
+                                <p id="total-sales-count">0</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Average Sale</h4>
+                                <p id="average-sale-amount">₹0.00</p>
+                            </div>
+                        </div>
+                        <div class="report-table-container">
+                            <table class="report-table" id="sales-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Voucher No.</th>
+                                        <th>Party Name</th>
+                                        <th>Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Sales data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Summary Tab Content -->
+                <div class="tab-content" id="purchase-tab-content" style="display: none;">
+                    <h3>Purchase Summary</h3>
+                    <div class="report-content" id="purchase-summary-content">
+                        <div class="summary-cards">
+                            <div class="summary-card">
+                                <h4>Total Purchases</h4>
+                                <p id="total-purchase-amount">₹0.00</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Total Transactions</h4>
+                                <p id="total-purchase-count">0</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Average Purchase</h4>
+                                <p id="average-purchase-amount">₹0.00</p>
+                            </div>
+                        </div>
+                        <div class="report-table-container">
+                            <table class="report-table" id="purchase-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Voucher No.</th>
+                                        <th>Party Name</th>
+                                        <th>Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Purchase data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profit & Loss Tab Content -->
+                <div class="tab-content" id="profit-tab-content" style="display: none;">
+                    <h3>Profit & Loss Statement</h3>
+                    <div class="report-content" id="profit-loss-content">
+                        <div class="summary-cards">
+                            <div class="summary-card">
+                                <h4>Total Revenue</h4>
+                                <p id="total-revenue">₹0.00</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Total Expenses</h4>
+                                <p id="total-expenses">₹0.00</p>
+                            </div>
+                            <div class="summary-card profit-card" id="profit-card">
+                                <h4>Net Profit</h4>
+                                <p id="net-profit">₹0.00</p>
+                            </div>
+                        </div>
+                        <div class="profit-loss-details">
+                            <div class="pl-section">
+                                <h4>Income</h4>
+                                <div class="pl-item" id="sales-income">
+                                    <span class="pl-item-name">Sales</span>
+                                    <span class="pl-item-amount">₹0.00</span>
+                                </div>
+                                <div class="pl-item" id="other-income">
+                                    <span class="pl-item-name">Other Income</span>
+                                    <span class="pl-item-amount">₹0.00</span>
+                                </div>
+                                <div class="pl-total">
+                                    <span class="pl-total-label">Total Income</span>
+                                    <span class="pl-total-amount" id="total-income-amount">₹0.00</span>
+                                </div>
+                            </div>
+                            <div class="pl-section">
+                                <h4>Expenses</h4>
+                                <div class="pl-item" id="purchase-expense">
+                                    <span class="pl-item-name">Purchases</span>
+                                    <span class="pl-item-amount">₹0.00</span>
+                                </div>
+                                <div id="expense-categories-list">
+                                    <!-- Expense categories will be populated by JavaScript -->
+                                </div>
+                                <div class="pl-total">
+                                    <span class="pl-total-label">Total Expenses</span>
+                                    <span class="pl-total-amount" id="total-expense-amount">₹0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accounts Book Tab Content -->
+                <div class="tab-content" id="accounts-tab-content" style="display: none;">
+                    <h3>Accounts Book</h3>
+                    <div class="report-content" id="accounts-book-content">
+                        <div class="accounts-tabs">
+                            <button class="sub-tab-btn active" data-tab="ledger">Ledger</button>
+                            <button class="sub-tab-btn" data-tab="daybook">Day Book</button>
+                            <button class="sub-tab-btn" data-tab="cashbook">Cash Book</button>
+                        </div>
+                        
+                        <div class="account-filters">
+                            <div class="filter-group" id="party-filter-group">
+                                <label for="filter-party">Party:</label>
+                                <select id="filter-party" class="form-control-sm">
+                                    <option value="">All Parties</option>
+                                    <!-- Parties will be populated by JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="accounts-tab-content" id="ledger-content">
+                            <table class="report-table" id="ledger-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Voucher Type</th>
+                                        <th>Voucher No.</th>
+                                        <th>Particulars</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Ledger data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="accounts-tab-content" id="daybook-content" style="display: none;">
+                            <table class="report-table" id="daybook-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Voucher Type</th>
+                                        <th>Voucher No.</th>
+                                        <th>Party Name</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Day book data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="accounts-tab-content" id="cashbook-content" style="display: none;">
+                            <table class="report-table" id="cashbook-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Particulars</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Cash book data will be populated by JavaScript -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Closing Balance</strong></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td id="cash-closing-balance">₹0.00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/reports.js"></script>
+    <script>
+        // Load partials
+        loadPartial('#sidebar-container', '/partials/sidebar.html');
+        loadPartial('#header-container', '/partials/header.html');
+        
+        // Initialize reports page
+        document.addEventListener('DOMContentLoaded', () => {
+            initReportsPage();
+        });
+    </script>
+</body>
+</html>

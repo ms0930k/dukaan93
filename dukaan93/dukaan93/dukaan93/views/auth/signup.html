@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - DUKAAN 93</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>DUKAAN 93</h1>
+        <h2>Create your account</h2>
+      </div>
+      
+      <div class="auth-body">
+        <form id="signupForm">
+          <div class="alert alert-danger" id="errorMessage" style="display: none;"></div>
+          
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password (min. 6 characters)" required minlength="6">
+          </div>
+          
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required minlength="6">
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn primary-btn btn-block">Create Account</button>
+          </div>
+        </form>
+        
+        <div class="social-login">
+          <p>Or sign up with</p>
+          <button id="googleSignup" class="btn google-btn">
+            <img src="/assets/images/google-icon.png" alt="Google"> Sign up with Google
+          </button>
+        </div>
+        
+        <div class="auth-links">
+          <p>Already have an account? <a href="/auth/login.html">Login</a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="auth-footer">
+      <p>&copy; 2025 DUKAAN 93. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+</body>
+</html>

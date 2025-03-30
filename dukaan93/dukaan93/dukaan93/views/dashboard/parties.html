@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parties - Dukaan 93</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Include sidebar -->
+        <div id="sidebar-container"></div>
+
+        <div class="main-content">
+            <!-- Include header -->
+            <div id="header-container"></div>
+
+            <div class="dashboard-content">
+                <div class="page-header">
+                    <h2>Parties</h2>
+                    <button class="btn btn-primary" id="create-party-btn">Create New Party</button>
+                </div>
+
+                <div class="parties-container">
+                    <div class="parties-list" id="parties-list">
+                        <!-- Parties will be populated by JavaScript -->
+                        <p class="empty-state">No parties created yet</p>
+                    </div>
+
+                    <div class="party-form-container" id="party-form-container" style="display: none;">
+                        <h3 id="party-form-title">Create New Party</h3>
+                        <form id="party-form">
+                            <input type="hidden" id="party-id">
+                            <div class="form-group">
+                                <label for="party-name">Party Name *</label>
+                                <input type="text" id="party-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="party-type">Party Type *</label>
+                                <select id="party-type" class="form-control" required>
+                                    <option value="">Select Type</option>
+                                    <option value="customer">Customer</option>
+                                    <option value="supplier">Supplier</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="party-gst">GST Number</label>
+                                <input type="text" id="party-gst" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="party-address">Address</label>
+                                <textarea id="party-address" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="party-phone">Phone</label>
+                                <input type="text" id="party-phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="party-email">Email</label>
+                                <input type="email" id="party-email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="party-opening-balance">Opening Balance</label>
+                                <input type="number" id="party-opening-balance" class="form-control" value="0" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label for="party-balance-type">Balance Type</label>
+                                <select id="party-balance-type" class="form-control">
+                                    <option value="debit">Debit (Receivable)</option>
+                                    <option value="credit">Credit (Payable)</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Party</button>
+                                <button type="button" class="btn btn-secondary" id="cancel-party-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete this party? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="confirm-delete-btn">Delete</button>
+                <button class="btn btn-secondary" id="cancel-delete-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/parties.js"></script>
+    <script>
+        // Load partials
+        loadPartial('#sidebar-container', '/partials/sidebar.html');
+        loadPartial('#header-container', '/partials/header.html');
+        
+        // Initialize parties page
+        document.addEventListener('DOMContentLoaded', () => {
+            initPartiesPage();
+        });
+    </script>
+</body>
+</html>
